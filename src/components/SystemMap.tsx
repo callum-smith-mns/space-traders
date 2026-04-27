@@ -120,15 +120,6 @@ export default function SystemMap({ waypoints, currentWaypoint }: SystemMapProps
     };
   }, []);
 
-  // screenToWorld reserved for future use (e.g. click-to-select)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const screenToWorld = useCallback((sx: number, sy: number, cam: typeof camera, cw: number, ch: number) => {
-    return {
-      wx: (sx - cw / 2) / cam.zoom + cam.x,
-      wy: (sy - ch / 2) / cam.zoom + cam.y,
-    };
-  }, []);
-
   // ── Draw ──
   useEffect(() => {
     const canvas = canvasRef.current;

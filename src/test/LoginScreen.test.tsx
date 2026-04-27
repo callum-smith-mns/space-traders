@@ -133,8 +133,8 @@ describe('LoginScreen', () => {
   it('renders saved agents section when agents exist', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
       savedAgents: [
-        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' },
-        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'X2-HQ' },
+        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' },
+        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'X2-HQ', tokenKey: 'k2', ivKey: 'iv2' },
       ],
     }));
 
@@ -147,7 +147,7 @@ describe('LoginScreen', () => {
   it('clicking a saved agent calls loginSavedAgent', async () => {
     const loginSaved = vi.fn().mockResolvedValue(undefined);
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
-      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' }],
+      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' }],
       loginSavedAgent: loginSaved,
     }));
 
@@ -159,7 +159,7 @@ describe('LoginScreen', () => {
   it('handles error on saved agent login', async () => {
     const loginSaved = vi.fn().mockRejectedValue(new Error('Token expired'));
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
-      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' }],
+      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' }],
       loginSavedAgent: loginSaved,
     }));
 
@@ -171,7 +171,7 @@ describe('LoginScreen', () => {
   it('handles non-Error on saved agent login', async () => {
     const loginSaved = vi.fn().mockRejectedValue('string err');
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
-      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' }],
+      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' }],
       loginSavedAgent: loginSaved,
     }));
 
@@ -183,7 +183,7 @@ describe('LoginScreen', () => {
   it('shows delete confirmation and deletes agent', () => {
     const deleteFn = vi.fn();
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
-      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' }],
+      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' }],
       deleteSavedAgent: deleteFn,
     }));
 
@@ -203,7 +203,7 @@ describe('LoginScreen', () => {
 
   it('cancels delete confirmation', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
-      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' }],
+      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' }],
     }));
 
     render(<LoginScreen />);
@@ -216,7 +216,7 @@ describe('LoginScreen', () => {
 
   it('closes delete dialog on overlay click', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
-      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ' }],
+      savedAgents: [{ symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'X1-HQ', tokenKey: 'k1', ivKey: 'iv1' }],
     }));
 
     render(<LoginScreen />);

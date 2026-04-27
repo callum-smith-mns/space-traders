@@ -556,7 +556,7 @@ describe('FlightControl', () => {
 
   it('shows condition classes based on values', () => {
     const ship = mockShip({
-      frame: { symbol: 'F', name: 'Frame', condition: 0.3, integrity: 0.3 },
+      frame: { symbol: 'F', name: 'Frame', condition: 0.3, integrity: 0.3, fuelCapacity: 600, moduleSlots: 8, mountingPoints: 5 },
       reactor: { symbol: 'R', name: 'Reactor', condition: 0.5, integrity: 0.5, powerOutput: 10 },
     });
     render(<FlightControl ship={ship} onShipUpdate={onShipUpdate} />, { wrapper: createWrapper() });
@@ -642,6 +642,7 @@ describe('FlightControl', () => {
     vi.mocked(api.navigateShip).mockResolvedValue({
       nav: { ...mockShip().nav, status: 'IN_TRANSIT' },
       fuel: { current: 350, capacity: 600, consumed: { amount: 50, timestamp: '' } },
+      events: [],
     });
     const ship = mockShip();
     render(<FlightControl ship={ship} onShipUpdate={onShipUpdate} />, { wrapper: createWrapper() });
@@ -692,6 +693,7 @@ describe('FlightControl', () => {
         type: 'ASTEROID',
         x: 200,
         y: 100,
+        systemSymbol: 'X1-TEST',
         traits: [{ symbol: 'MINERAL_DEPOSITS', name: 'Mineral Deposits', description: '' }],
         orbitals: [],
       }],
@@ -716,10 +718,8 @@ describe('FlightControl', () => {
         symbol: 'ENEMY-1',
         registration: { name: 'ENEMY-1', factionSymbol: 'PIRATES', role: 'PATROL' },
         nav: { systemSymbol: 'X1-TEST', waypointSymbol: 'X1-TEST-A1', route: { origin: { symbol: 'X1-TEST-A1', type: '' }, destination: { symbol: 'X1-TEST-A1', type: '' }, departureTime: '', arrival: '' }, status: 'IN_ORBIT', flightMode: 'CRUISE' },
-        frame: { symbol: 'F', name: 'Frame' },
-        reactor: { symbol: 'R', name: 'Reactor' },
-        engine: { symbol: 'E', name: 'Engine' },
-        mounts: [],
+        frame: { symbol: 'F' },
+        engine: { symbol: 'E' },
       }],
     });
     const ship = mockShip();

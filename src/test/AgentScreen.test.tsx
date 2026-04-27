@@ -204,8 +204,8 @@ describe('AgentScreen', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
       agent: { symbol: 'PILOT-A', headquarters: 'HQ', credits: 0, startingFaction: 'C', shipCount: 1 },
       savedAgents: [
-        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ' },
-        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2' },
+        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ', tokenKey: 'k1', ivKey: 'iv1' },
+        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2', tokenKey: 'k2', ivKey: 'iv2' },
       ],
       loginSavedAgent: loginSaved,
     }));
@@ -223,8 +223,8 @@ describe('AgentScreen', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
       agent: { symbol: 'PILOT-A', headquarters: 'HQ', credits: 0, startingFaction: 'C', shipCount: 1 },
       savedAgents: [
-        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ' },
-        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2' },
+        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ', tokenKey: 'k1', ivKey: 'iv1' },
+        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2', tokenKey: 'k2', ivKey: 'iv2' },
       ],
       loginSavedAgent: loginSaved,
     }));
@@ -239,8 +239,8 @@ describe('AgentScreen', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
       agent: { symbol: 'PILOT-A', headquarters: 'HQ', credits: 0, startingFaction: 'C', shipCount: 1 },
       savedAgents: [
-        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ' },
-        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2' },
+        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ', tokenKey: 'k1', ivKey: 'iv1' },
+        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2', tokenKey: 'k2', ivKey: 'iv2' },
       ],
       deleteSavedAgent: deleteFn,
     }));
@@ -258,8 +258,8 @@ describe('AgentScreen', () => {
     vi.spyOn(AuthModule, 'useAuth').mockReturnValue(mockUseAuth({
       agent: { symbol: 'PILOT-A', headquarters: 'HQ', credits: 0, startingFaction: 'C', shipCount: 1 },
       savedAgents: [
-        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ' },
-        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2' },
+        { symbol: 'PILOT-A', faction: 'COSMIC', headquarters: 'HQ', tokenKey: 'k1', ivKey: 'iv1' },
+        { symbol: 'PILOT-B', faction: 'VOID', headquarters: 'HQ2', tokenKey: 'k2', ivKey: 'iv2' },
       ],
     }));
 
