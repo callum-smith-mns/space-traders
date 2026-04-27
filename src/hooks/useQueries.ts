@@ -4,8 +4,8 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from '@tanstack/react-query';
-import { useEffect, useRef, useCallback, useState } from 'react';
-import { api, type Ship, type ShipCooldown, type Contract, type Waypoint, type Market, type Faction, type Agent } from '../services/api';
+import { useEffect, useRef, useCallback } from 'react';
+import { api, type Ship, type ShipCooldown, type Contract, type Waypoint, type Faction } from '../services/api';
 
 /* ═══════════════════════════════════════════
    Shared paginated fetchers
@@ -197,8 +197,6 @@ export function useShipCooldown(shipSymbol: string) {
   const qc = useQueryClient();
   const timerRef = useRef<ReturnType<typeof setInterval>>(undefined);
   const key = queryKeys.cooldown(shipSymbol);
-  const [initialised, setInitialised] = useState(false);
-
   // Read cooldown from the query cache (reactive)
   const { data: cooldown = null } = useQuery<ShipCooldown | null>({
     queryKey: key,
@@ -219,7 +217,6 @@ export function useShipCooldown(shipSymbol: string) {
       // Not yet in cache — trigger the query
       qc.invalidateQueries({ queryKey: key });
     }
-    setInitialised(true);
   }, [shipSymbol, qc, key]);
 
   // Patch only the cooldown field on the ships list (no stale spread)
@@ -257,7 +254,7 @@ export function useShipCooldown(shipSymbol: string) {
     }, 1000);
 
     return () => clearInterval(timerRef.current);
-  }, [cooldown?.expiration, qc, key, syncToShipCache]);
+  }, [cooldown, cooldown?.expiration, qc, key, syncToShipCache]);
 
   const isOnCooldown = !!cooldown && cooldown.remainingSeconds > 0;
 

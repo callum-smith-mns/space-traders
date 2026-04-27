@@ -6,7 +6,7 @@ import StarField from '../components/StarField';
 
 describe('StarField', () => {
   beforeEach(() => {
-    vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation(() => {
       // Don't run animation loop in tests
       return 1;
     });
