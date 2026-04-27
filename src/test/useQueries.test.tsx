@@ -430,7 +430,7 @@ describe('usePrefetchShipData', () => {
   it('prefetches waypoints and market for a ship', async () => {
     vi.spyOn(api, 'listWaypoints').mockResolvedValue([]);
     vi.spyOn(api, 'getMarket').mockResolvedValue({ symbol: 'WP-1', exports: [], imports: [], exchange: [] });
-    const { wrapper, qc } = createWrapper();
+    const { wrapper } = createWrapper();
 
     const { result } = renderHook(() => usePrefetchShipData(), { wrapper });
 

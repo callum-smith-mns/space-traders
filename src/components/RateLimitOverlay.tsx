@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { api } from '../services/api';
 import './RateLimitOverlay.css';
 
@@ -22,19 +22,18 @@ export default function RateLimitOverlay() {
     });
   }, []);
 
-  const tick = useCallback(() => {
-    if (!resetAt) { setCountdown(0); return; }
-    const remaining = Math.max(0, Math.ceil((resetAt - Date.now()) / 1000));
-    setCountdown(remaining);
-    if (remaining <= 0) { setResetAt(null); setVisible(false); }
-  }, [resetAt]);
-
   useEffect(() => {
-    if (!resetAt) { setCountdown(0); return; }
-    tick();
-    timerRef.current = setInterval(tick, 250);
+    if (!resetAt) return;
+    const doTick = () => {
+      if (!resetAt) { setCountdown(0); return; }
+      const remaining = Math.max(0, Math.ceil((resetAt - Date.now()) / 1000));
+      setCountdown(remaining);
+      if (remaining <= 0) { setResetAt(null); setVisible(false); }
+    };
+    doTick();
+    timerRef.current = setInterval(doTick, 250);
     return () => clearInterval(timerRef.current);
-  }, [resetAt, tick]);
+  }, [resetAt]);
 
   if (!visible || !resetAt || countdown <= 0) return null;
 

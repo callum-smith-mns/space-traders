@@ -89,8 +89,8 @@ export default function TradeRoutesWindow({ systemSymbol }: TradeRoutesWindowPro
     gcTime: 1000 * 60 * 60, // keep for 1 hour
   });
 
-  const markets = tradeData?.markets ?? [];
-  const links = tradeData?.links ?? [];
+  const markets = useMemo(() => tradeData?.markets ?? [], [tradeData]);
+  const links = useMemo(() => tradeData?.links ?? [], [tradeData]);
 
   // Collect unique resource symbols for filter dropdown
   const allResources = useMemo(() => {

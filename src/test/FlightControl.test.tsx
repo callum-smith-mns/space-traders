@@ -4,7 +4,7 @@ import FlightControl from '../components/FlightControl';
 import * as AuthModule from '../contexts/AuthContext';
 import * as useQueriesModule from '../hooks/useQueries';
 import { mockShip, mockShipInTransit, mockWaypoint } from './mocks';
-import type { Ship } from '../services/api';
+
 
 vi.mock('../services/api', () => ({
   api: {
