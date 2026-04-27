@@ -41,7 +41,7 @@ import { api } from '../services/api';
 
 import * as surveyCache from '../utils/surveyCache';
 
-vi.mock('/Users/callum.smith/Sites/spacetraders-ui/src/utils/surveyCache', () => ({
+vi.mock('../utils/surveyCache', () => ({
   getSurveys: vi.fn().mockReturnValue([]),
   setSurveys: vi.fn(),
   addSurveys: vi.fn(),
