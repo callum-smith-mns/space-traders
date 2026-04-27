@@ -17,7 +17,7 @@ export function mockShip(overrides: Partial<Ship> = {}): Ship {
     },
     crew: { current: 10, capacity: 20, required: 5, morale: 80 },
     fuel: { current: 400, capacity: 600, consumed: { amount: 0, timestamp: '' } },
-    frame: { symbol: 'FRAME_FRIGATE', name: 'Frigate', condition: 0.9, integrity: 0.95 },
+    frame: { symbol: 'FRAME_FRIGATE', name: 'Frigate', condition: 0.9, integrity: 0.95, fuelCapacity: 600, moduleSlots: 8, mountingPoints: 5 },
     reactor: { symbol: 'REACTOR_SOLAR', name: 'Solar Reactor', condition: 0.85, integrity: 0.9, powerOutput: 20 },
     engine: { symbol: 'ENGINE_IMPULSE', name: 'Impulse Drive', condition: 0.8, integrity: 0.85, speed: 30 },
     modules: [{ symbol: 'MODULE_CARGO', name: 'Cargo Hold', capacity: 40 }],

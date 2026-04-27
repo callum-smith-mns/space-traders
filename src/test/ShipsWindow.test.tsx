@@ -87,7 +87,7 @@ describe('ShipsWindow', () => {
 
     const onSelect = vi.fn();
     render(<ShipsWindow onSelectShip={onSelect} />, { wrapper });
-    screen.getByText('SHIP-1').closest('.ship-row')?.click();
+    (screen.getByText('SHIP-1').closest('.ship-row') as HTMLElement)?.click();
     expect(onSelect).toHaveBeenCalledWith(ships[0]);
   });
 

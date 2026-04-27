@@ -47,7 +47,7 @@ const mockShip: Ship = {
   },
   crew: { current: 5, capacity: 10, required: 3, morale: 100 },
   fuel: { current: 100, capacity: 200, consumed: { amount: 0, timestamp: '' } },
-  frame: { symbol: 'FRAME_MINER', name: 'Miner', condition: 1, integrity: 1 },
+  frame: { symbol: 'FRAME_MINER', name: 'Miner', condition: 1, integrity: 1, fuelCapacity: 200, moduleSlots: 4, mountingPoints: 2 },
   reactor: { symbol: 'REACTOR_SOLAR', name: 'Solar', condition: 1, integrity: 1, powerOutput: 10 },
   engine: { symbol: 'ENGINE_ION', name: 'Ion', condition: 1, integrity: 1, speed: 10 },
   modules: [],
