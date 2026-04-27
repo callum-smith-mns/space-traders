@@ -1,0 +1,30 @@
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 16px;
+  width: 100%;
+}
+
+.spinner-ring {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-border-dim);
+  border-top-color: var(--color-cyan);
+  border-radius: 50%;
+  animation: spinner-rotate 0.8s linear infinite;
+}
+
+.spinner-message {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}

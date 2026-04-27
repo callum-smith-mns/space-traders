@@ -1,0 +1,551 @@
+/* ═══════════════════════════════════════════
+   Navigation Guide
+   ═══════════════════════════════════════════ */
+
+.navguide {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0;
+}
+
+/* ── Tabs ── */
+.navguide-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--color-border-dim);
+  flex-shrink: 0;
+}
+
+.navguide-tab {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.navguide-tab:hover {
+  color: var(--color-text);
+}
+
+.navguide-tab--active {
+  color: var(--color-cyan);
+  border-bottom-color: var(--color-cyan);
+}
+
+/* ── Content ── */
+.navguide-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0 0;
+}
+
+.navguide-content--map {
+  overflow: hidden;
+  padding: 0;
+}
+
+.navguide-empty {
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  padding: 12px 0;
+  font-style: italic;
+}
+
+/* ── Guide / instructions ── */
+.navguide-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.navguide-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.navguide-section-title {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  opacity: 0.7;
+}
+
+.navguide-steps {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.navguide-steps strong {
+  color: var(--color-text-bright);
+}
+
+/* Flight mode cards in guide */
+.navguide-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navguide-mode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.navguide-mode-name {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-bright);
+  min-width: 60px;
+}
+
+.navguide-mode-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+/* Key actions */
+.navguide-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navguide-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.navguide-action-cmd {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-cyan);
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Tips */
+.navguide-tips {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.navguide-tips strong {
+  color: var(--color-text-bright);
+}
+
+/* ── Route Planner ── */
+.navguide-planner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navguide-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navguide-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navguide-auto {
+  font-size: 0.6rem;
+  color: var(--color-cyan);
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.navguide-select {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.navguide-select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Flight mode buttons */
+.navguide-mode-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.navguide-mode-btn {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border-dim);
+  background: var(--color-bg);
+  color: var(--color-text-dim);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.navguide-mode-btn:hover {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.navguide-mode-btn--active {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.08);
+}
+
+/* ── Route results ── */
+.navguide-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.navguide-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.navguide-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.navguide-summary-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.navguide-summary-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-bright);
+}
+
+.navguide-fuel-cap {
+  color: var(--color-text-dim);
+}
+
+.navguide-danger {
+  color: var(--color-error);
+}
+
+.navguide-notice {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+  border-radius: 4px;
+  color: var(--color-warning);
+}
+
+/* Step-by-step route */
+.navguide-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navguide-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.navguide-step-num {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.1);
+  border: 1px solid var(--color-cyan-dim);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.navguide-step-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navguide-step-route {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navguide-step-wp {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-bright);
+}
+
+.navguide-step-arrow {
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+}
+
+.navguide-step-meta {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+}
+
+/* ═══════════════════════════════════════════
+   Waypoint List Tab
+   ═══════════════════════════════════════════ */
+
+.wplist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wplist-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wplist-group-header {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  opacity: 0.7;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--color-border-dim);
+  margin-bottom: 2px;
+}
+
+.wplist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wplist-item {
+  padding: 6px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.wplist-item--current {
+  border-color: var(--color-cyan-dim);
+  background: rgba(0, 232, 208, 0.04);
+}
+
+.wplist-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wplist-item-symbol {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-bright);
+}
+
+.wplist-item-type {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.wplist-item-here {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(0, 232, 208, 0.12);
+  border: 1px solid var(--color-cyan-dim);
+  color: var(--color-cyan);
+  margin-left: auto;
+}
+
+.wplist-item-coords {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+}
+
+.wplist-item-orbitals {
+  color: var(--color-text-dim);
+}
+
+.wplist-item-construction {
+  color: var(--color-warning);
+}
+
+.wplist-item-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.wplist-trait {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text);
+  cursor: default;
+}
+
+/* ── Trait filters ── */
+.wplist-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.wplist-filter-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.wplist-filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.wplist-filter-tag {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.wplist-filter-tag:hover {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan-dim);
+  background: rgba(0, 232, 208, 0.05);
+}
+
+.wplist-filter-tag--active {
+  color: var(--color-bg);
+  background: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+
+.wplist-filter-tag--active:hover {
+  background: #00f5de;
+  color: var(--color-bg);
+}
+
+.wplist-filter-clear {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  align-self: flex-start;
+}
+
+.wplist-filter-clear:hover {
+  color: var(--color-text);
+}

@@ -1,0 +1,318 @@
+/* ═══════════════════════════════════════════
+   Trade Routes Window
+   ═══════════════════════════════════════════ */
+
+.tr {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tr-loading,
+.tr-error,
+.tr-hint {
+  padding: 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+}
+
+.tr-error {
+  color: var(--color-error);
+}
+
+.tr-system {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+}
+
+/* ── Toggle ── */
+.tr-toggle {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--color-border-dim);
+}
+
+.tr-toggle-btn {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: none;
+  background: none;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.tr-toggle-btn:hover {
+  color: var(--color-text);
+}
+
+.tr-toggle-btn--active {
+  color: var(--color-cyan);
+  border-bottom-color: var(--color-cyan);
+}
+
+/* ── Filters ── */
+.tr-filters {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  padding: 0 2px;
+}
+
+.tr-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tr-filter-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.tr-filter-select {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 4px 6px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.tr-filter-select:focus {
+  border-color: var(--color-cyan);
+}
+
+.tr-filter-clear {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  background: none;
+  border: 1px solid var(--color-border-dim);
+  border-radius: 3px;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.tr-filter-clear:hover {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* ── Trade Routes ── */
+.tr-routes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tr-route {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  transition: border-color 0.15s;
+}
+
+.tr-route:hover {
+  border-color: var(--color-border);
+}
+
+.tr-route--profitable {
+  border-left: 3px solid var(--color-success);
+}
+
+.tr-route-good {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-bright);
+}
+
+.tr-route-path {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+
+.tr-route-wp {
+  font-family: var(--font-mono);
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+}
+
+.tr-route-arrow {
+  color: var(--color-cyan);
+  font-size: 0.85rem;
+}
+
+.tr-route-prices {
+  display: flex;
+  gap: 10px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.tr-route-buy {
+  color: var(--color-text-dim);
+}
+
+.tr-route-sell {
+  color: var(--color-text-dim);
+}
+
+.tr-route-profit {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.tr-route-profit--pos {
+  color: var(--color-success);
+}
+
+.tr-route-profit--neg {
+  color: var(--color-error);
+}
+
+/* ── Markets view ── */
+.tr-markets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tr-market {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.tr-market-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tr-market-wp {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-bright);
+}
+
+.tr-market-type {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tr-market-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tr-market-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tr-label--export {
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.tr-label--import {
+  color: var(--color-warning);
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+}
+
+.tr-label--exchange {
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.08);
+  border: 1px solid var(--color-cyan-dim);
+}
+
+.tr-market-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.tr-tag {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text);
+}
+
+.tr-tag--export {
+  border-color: rgba(0, 255, 136, 0.15);
+}
+
+.tr-tag--import {
+  border-color: rgba(255, 170, 0, 0.15);
+}
+
+.tr-tag--exchange {
+  border-color: rgba(0, 232, 208, 0.1);
+}
+
+/* ── Filter highlighting ── */
+.tr-market--highlight {
+  border-color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.04);
+}
+
+.tr-market--dim {
+  opacity: 0.45;
+}
+
+.tr-market-wp--match {
+  color: var(--color-cyan);
+}
+
+.tr-tag--match {
+  background: rgba(0, 232, 208, 0.15);
+  border-color: var(--color-cyan);
+  color: var(--color-text-bright);
+}

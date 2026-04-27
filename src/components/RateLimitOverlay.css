@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════
+   Rate Limit Overlay
+   ═══════════════════════════════════════════ */
+
+.ratelimit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 6, 12, 0.85);
+  backdrop-filter: blur(6px);
+  animation: ratelimit-fadeIn 0.2s ease-out;
+}
+
+@keyframes ratelimit-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.ratelimit-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 48px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 1px var(--color-cyan-dim);
+  text-align: center;
+  max-width: 360px;
+}
+
+.ratelimit-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.ratelimit-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-warning, #ffaa00);
+}
+
+.ratelimit-desc {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  line-height: 1.5;
+}
+
+.ratelimit-countdown {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--color-text-bright);
+  letter-spacing: 0.05em;
+}
+
+.ratelimit-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--color-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ratelimit-bar-fill {
+  height: 100%;
+  background: var(--color-warning, #ffaa00);
+  border-radius: 2px;
+  animation: ratelimit-drain linear forwards;
+  width: 100%;
+}
+
+@keyframes ratelimit-drain {
+  from { width: 100%; }
+  to   { width: 0%; }
+}

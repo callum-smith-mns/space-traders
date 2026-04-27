@@ -1,0 +1,1438 @@
+/* ═══════════════════════════════════════════
+   Flight Control — centre panel
+   ═══════════════════════════════════════════ */
+
+.fc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+
+/* ── Header ── */
+.fc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-dim);
+}
+
+.fc-header-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fc-ship-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.fc-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc-ship-name {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-bright);
+}
+
+.fc-ship-role {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+}
+
+.fc-ship-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fc-nav-badge {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.fc-nav-badge--docked {
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.1);
+  border: 1px solid var(--color-cyan-dim);
+}
+
+.fc-nav-badge--in-orbit {
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.fc-nav-badge--in-transit {
+  color: var(--color-warning);
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+.fc-location {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+}
+
+/* ── Fuel ── */
+.fc-fuel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.fc-fuel-track {
+  flex: 1;
+  height: 6px;
+  background: var(--color-bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fc-fuel-fill {
+  height: 100%;
+  background: var(--color-cyan);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* Hatched fuel deduction preview */
+.fc-fuel-deduction {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 232, 208, 0.4),
+    rgba(0, 232, 208, 0.4) 2px,
+    rgba(0, 232, 208, 0.15) 2px,
+    rgba(0, 232, 208, 0.15) 4px
+  );
+  box-shadow: 0 0 6px rgba(0, 232, 208, 0.3);
+  animation: fuel-deduction-pulse 1.5s ease-in-out infinite;
+  transition: left 0.3s, width 0.3s;
+}
+
+.fc-fuel-deduction--danger {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 59, 92, 0.5),
+    rgba(255, 59, 92, 0.5) 2px,
+    rgba(255, 59, 92, 0.2) 2px,
+    rgba(255, 59, 92, 0.2) 4px
+  );
+  box-shadow: 0 0 6px rgba(255, 59, 92, 0.4);
+}
+
+@keyframes fuel-deduction-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.fc-fuel-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+
+.fc-fuel-est {
+  color: var(--color-cyan);
+}
+
+.fc-fuel-est--danger {
+  color: var(--color-error);
+}
+
+/* ── Cooldown bar ── */
+.fc-cooldown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.fc-cooldown-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--color-warning);
+  white-space: nowrap;
+}
+
+.fc-cooldown-track {
+  flex: 1;
+  height: 4px;
+  background: var(--color-bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fc-cooldown-fill {
+  height: 100%;
+  background: var(--color-warning);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* ── Feedback toast ── */
+.fc-feedback {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  animation: fc-fade-in 0.2s;
+}
+
+.fc-feedback--ok {
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.fc-feedback--err {
+  color: var(--color-error);
+  background: rgba(255, 59, 92, 0.08);
+  border: 1px solid rgba(255, 59, 92, 0.2);
+}
+
+@keyframes fc-fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Tabs ── */
+.fc-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--color-border-dim);
+  padding-bottom: 0;
+}
+
+.fc-tab {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.fc-tab:hover {
+  color: var(--color-text);
+}
+
+.fc-tab--active {
+  color: var(--color-cyan);
+  border-bottom-color: var(--color-cyan);
+}
+
+/* ── Panel area ── */
+.fc-panel {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Shared elements ── */
+.fc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.fc-section-title {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  opacity: 0.7;
+}
+
+.fc-action-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.fc-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  padding: 8px 0;
+  font-style: italic;
+}
+
+/* ── Buttons ── */
+.fc-btn {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fc-btn:hover:not(:disabled) {
+  border-color: var(--color-cyan-dim);
+  color: var(--color-text-bright);
+  background: var(--color-bg-tertiary);
+}
+
+.fc-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.fc-btn--primary {
+  background: var(--color-cyan);
+  color: var(--color-bg);
+  border-color: var(--color-cyan);
+}
+
+.fc-btn--primary:hover:not(:disabled) {
+  background: #00f5de;
+  box-shadow: 0 0 10px rgba(0, 232, 208, 0.3);
+}
+
+.fc-btn--accent {
+  border-color: var(--color-cyan-dim);
+  color: var(--color-cyan);
+}
+
+.fc-btn--accent:hover:not(:disabled) {
+  background: rgba(0, 232, 208, 0.1);
+}
+
+.fc-btn--danger {
+  border-color: rgba(255, 59, 92, 0.3);
+  color: var(--color-error);
+}
+
+.fc-btn--danger:hover:not(:disabled) {
+  background: rgba(255, 59, 92, 0.1);
+}
+
+.fc-btn-sm {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fc-btn-sm:hover:not(:disabled) {
+  border-color: var(--color-cyan-dim);
+}
+
+.fc-btn-sm:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.fc-btn-sm.fc-btn--accent {
+  border-color: var(--color-cyan-dim);
+  color: var(--color-cyan);
+}
+
+.fc-btn-sm.fc-btn--danger {
+  border-color: rgba(255, 59, 92, 0.3);
+  color: var(--color-error);
+}
+
+/* ── Select ── */
+.fc-select {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.fc-select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Navigation ── */
+.fc-navigate-row {
+  display: flex;
+  gap: 6px;
+}
+
+/* ── Travel estimate ── */
+.fc-estimate {
+  display: flex;
+  gap: 16px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.fc-estimate-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.fc-estimate-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.fc-estimate-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-bright);
+}
+
+.fc-estimate-value--danger {
+  color: var(--color-error);
+}
+
+.fc-flight-modes {
+  display: flex;
+  gap: 4px;
+}
+
+.fc-mode-btn {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border-dim);
+  background: var(--color-bg);
+  color: var(--color-text-dim);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fc-mode-btn:hover:not(:disabled) {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.fc-mode-btn--active {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.08);
+}
+
+.fc-mode-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Transit banner ── */
+.fc-transit-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--color-warning);
+}
+
+.fc-transit-banner strong {
+  color: var(--color-text-bright);
+}
+
+.fc-transit-eta {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.fc-transit-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fc-transit-progress {
+  padding: 0 2px;
+}
+
+.fc-transit-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 170, 0, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fc-transit-fill {
+  height: 100%;
+  background: var(--color-warning);
+  border-radius: 2px;
+  transition: width 1s linear;
+  box-shadow: 0 0 8px rgba(255, 170, 0, 0.4);
+}
+
+/* ── Scan ── */
+.fc-scan {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-scan-results {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.fc-scan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.fc-scan-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.fc-scan-primary {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-bright);
+}
+
+.fc-scan-secondary {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+.fc-scan-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  width: 100%;
+}
+
+.fc-scan-tag {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text);
+}
+
+/* ── Extract ── */
+.fc-extract {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-extract-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fc-extract-group {
+  display: inline-flex;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.fc-extract-group .fc-extract-btn {
+  border: none;
+  border-radius: 0;
+}
+
+.fc-extract-group .fc-extract-btn + .fc-extract-btn {
+  border-left: 1px solid var(--color-border-dim);
+}
+
+/* ── Extract button base ── */
+.fc-extract-btn {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fc-extract-btn:hover:not(:disabled) {
+  border-color: var(--color-cyan-dim);
+  color: var(--color-text-bright);
+  background: var(--color-bg-tertiary);
+}
+
+.fc-extract-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.fc-extract-btn--sm {
+  font-size: 0.6rem;
+  padding: 3px 8px;
+  gap: 4px;
+}
+
+/* ── Action variant (mine/siphon) ── */
+.fc-extract-btn--action {
+  background: var(--color-cyan);
+  color: var(--color-bg);
+  border-color: var(--color-cyan);
+}
+
+.fc-extract-btn--action:hover:not(:disabled) {
+  background: #00f5de;
+  color: var(--color-bg);
+  border-color: #00f5de;
+  box-shadow: 0 0 10px rgba(0, 232, 208, 0.3);
+}
+
+/* ── Auto variant ── */
+.fc-extract-btn--auto {
+  color: var(--color-text-dim);
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+}
+
+.fc-extract-btn--active {
+  border-color: var(--color-success);
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.06);
+}
+
+.fc-extract-btn--active:hover:not(:disabled) {
+  background: rgba(0, 255, 136, 0.12);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.2);
+}
+
+/* ── Survey variant ── */
+.fc-extract-btn--survey {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+  background: rgba(255, 170, 0, 0.06);
+}
+
+.fc-extract-btn--survey:hover:not(:disabled) {
+  background: rgba(255, 170, 0, 0.12);
+  box-shadow: 0 0 8px rgba(255, 170, 0, 0.2);
+}
+
+/* ── Auto indicator light ── */
+.fc-auto-light {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.fc-auto-light--on {
+  background: var(--color-success);
+  box-shadow: 0 0 6px rgba(0, 255, 136, 0.7), 0 0 12px rgba(0, 255, 136, 0.3);
+  animation: fc-auto-pulse 2s ease-in-out infinite;
+}
+
+@keyframes fc-auto-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(0, 255, 136, 0.5), 0 0 8px rgba(0, 255, 136, 0.2); }
+  50% { box-shadow: 0 0 8px rgba(0, 255, 136, 0.9), 0 0 16px rgba(0, 255, 136, 0.4); }
+}
+
+.fc-auto-status {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-success);
+  padding: 4px 0;
+}
+
+/* ── Survey results ── */
+.fc-surveys {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fc-survey {
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.15s;
+}
+
+.fc-survey--active {
+  border-color: var(--color-success);
+  background: rgba(0, 255, 136, 0.03);
+}
+
+.fc-survey-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.fc-survey-actions {
+  display: flex;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.fc-survey-size {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.fc-survey-size--small {
+  color: var(--color-text-dim);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-dim);
+}
+
+.fc-survey-size--moderate {
+  color: var(--color-warning);
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+}
+
+.fc-survey-size--large {
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.fc-survey-expires {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+}
+
+.fc-survey-deposits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.fc-survey-deposit {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  background: var(--color-bg-secondary);
+  border-radius: 3px;
+  border: 1px solid var(--color-border-dim);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text);
+}
+
+.fc-survey-deposit-name {
+  color: var(--color-text);
+}
+
+.fc-survey-deposit-count {
+  color: var(--color-text-dim);
+  font-size: 0.65rem;
+}
+
+/* ── Cargo ── */
+.fc-cargo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-cargo-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fc-cargo-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--color-bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fc-cargo-bar-fill {
+  height: 100%;
+  background: var(--color-warning);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.fc-cargo-bar-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+
+.fc-cargo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc-cargo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: var(--color-bg);
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.fc-cargo-units {
+  color: var(--color-text-dim);
+}
+
+.fc-cargo-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-cargo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.fc-cargo-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.fc-cargo-name {
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.fc-cargo-qty {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.fc-cargo-actions {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.fc-btn-sm.fc-btn--deliver {
+  color: var(--color-success);
+  border-color: rgba(0, 255, 136, 0.3);
+}
+
+.fc-btn-sm.fc-btn--deliver:hover:not(:disabled) {
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.fc-btn-sm.fc-btn--refine {
+  color: #f0a040;
+  border-color: rgba(240, 160, 64, 0.3);
+}
+
+.fc-btn-sm.fc-btn--refine:hover:not(:disabled) {
+  background: rgba(240, 160, 64, 0.1);
+}
+
+.fc-btn-sm.fc-btn--transfer {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan-dim);
+}
+
+.fc-btn-sm.fc-btn--transfer:hover:not(:disabled) {
+  background: rgba(0, 232, 208, 0.1);
+}
+
+.fc-cargo-row--deliverable {
+  border-left: 2px solid var(--color-success);
+}
+
+.fc-cargo-delivery-badge {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 4px;
+}
+
+.fc-cargo-transfer-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.fc-cargo-transfer-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+
+.fc-cargo-transfer-select {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 4px 6px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.fc-cargo-transfer-select:focus {
+  border-color: var(--color-cyan);
+}
+
+.fc-cargo-deliver-hint {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.06);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: 4px;
+  padding: 5px 8px;
+}
+
+/* ── Market ── */
+.fc-market {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-market-notice {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: var(--color-warning);
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+  border-radius: 4px;
+}
+
+.fc-market-cargo-hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+  margin-left: auto;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.fc-market-table {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc-market-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 4px 8px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  border-bottom: 1px solid var(--color-border-dim);
+}
+
+.fc-market-header--trade {
+  grid-template-columns: 2fr 0.8fr 0.8fr 0.8fr minmax(80px, 1fr) minmax(100px, 1.2fr);
+}
+
+.fc-market-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 5px 8px;
+  align-items: center;
+  background: var(--color-bg);
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.fc-market-row--trade {
+  grid-template-columns: 2fr 0.8fr 0.8fr 0.8fr minmax(80px, 1fr) minmax(100px, 1.2fr);
+  padding: 4px 8px;
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+}
+
+.fc-market-good {
+  color: var(--color-text-bright);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fc-market-supply {
+  color: var(--color-text-dim);
+  font-size: 0.75rem;
+}
+.fc-market-supply--abundant { color: var(--color-success); }
+.fc-market-supply--moderate { color: var(--color-text); }
+.fc-market-supply--limited { color: var(--color-warning); }
+.fc-market-supply--scarce { color: var(--color-error); }
+
+.fc-market-price {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.fc-market-price--buy { color: var(--color-error); }
+.fc-market-price--sell { color: var(--color-success); }
+
+.fc-market-qty {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.fc-market-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* ── Shared quantity controls ── */
+.fc-qty-btn {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-dim);
+  border-radius: 3px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+}
+.fc-qty-btn:hover:not(:disabled) {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+.fc-qty-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.fc-qty-btn--max {
+  width: auto;
+  padding: 0 5px;
+  font-size: 0.65rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fc-qty-input {
+  width: 36px;
+  height: 22px;
+  text-align: center;
+  border: 1px solid var(--color-border-dim);
+  border-radius: 3px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  -moz-appearance: textfield;
+}
+.fc-qty-input::-webkit-outer-spin-button,
+.fc-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.fc-market-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-market-sub {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fc-market-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* ── Ship Details ── */
+.fc-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-stat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.fc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.fc-stat-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.fc-stat-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-bright);
+}
+
+.fc-cond--good { color: var(--color-success); }
+.fc-cond--warn { color: var(--color-warning); }
+.fc-cond--bad  { color: var(--color-error); }
+
+.fc-equip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.fc-equip-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.fc-equip-name {
+  color: var(--color-text);
+}
+
+.fc-equip-stat {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+/* ═══════════════════════════════════════════
+   Shipyard Panel
+   ═══════════════════════════════════════════ */
+.fc-shipyard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-shipyard-empty {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  padding: 16px;
+}
+
+.fc-shipyard-types {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fc-shipyard-type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.fc-shipyard-type-tag {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text-dim);
+}
+
+.fc-shipyard-ships {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-shipyard-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.fc-shipyard-card:hover {
+  border-color: var(--color-border);
+}
+
+.fc-shipyard-card--expanded {
+  border-color: var(--color-cyan-dim);
+}
+
+.fc-shipyard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+.fc-shipyard-card-name {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+}
+
+.fc-shipyard-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fc-shipyard-supply {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fc-shipyard-price {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-cyan);
+  white-space: nowrap;
+}
+
+.fc-shipyard-card-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 10px 10px;
+  border-top: 1px solid var(--color-border-dim);
+  padding-top: 8px;
+}
+
+.fc-shipyard-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  line-height: 1.4;
+}
+
+.fc-shipyard-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-shipyard-spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 12px;
+}
+
+.fc-shipyard-spec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.fc-shipyard-spec-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.fc-shipyard-spec-value {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text);
+}
+
+.fc-shipyard-loadout {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-shipyard-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.fc-shipyard-item {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text);
+}
+
+.fc-shipyard-buy-btn {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-cyan);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: stretch;
+  margin-top: 4px;
+}
+
+.fc-shipyard-buy-btn:hover:not(:disabled) {
+  background: #00f5de;
+  box-shadow: 0 0 12px rgba(0, 232, 208, 0.4);
+}
+
+.fc-shipyard-buy-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

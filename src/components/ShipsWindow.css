@@ -1,0 +1,357 @@
+/* ── Ships window content ── */
+.ships-loading,
+.ships-error,
+.ships-empty {
+  padding: 20px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+}
+
+.ships-error {
+  color: var(--color-error);
+}
+
+.ships-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Ship row ── */
+.ship-row {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.ship-row:hover {
+  border-color: var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.ship-row--expanded {
+  border-color: var(--color-cyan-dim);
+}
+
+.ship-row--selected {
+  border-color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.05);
+  box-shadow: inset 3px 0 0 var(--color-cyan);
+}
+
+/* ── Summary row ── */
+.ship-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+}
+
+.ship-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.ship-id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.ship-name {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-bright);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ship-role {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Nav status badges */
+.ship-nav-status {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.ship-nav-status--docked {
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.1);
+  border: 1px solid var(--color-cyan-dim);
+}
+
+.ship-nav-status--in-orbit {
+  color: var(--color-success);
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.ship-nav-status--in-transit {
+  color: var(--color-warning);
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+.ship-location {
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Mini fuel bar */
+.ship-fuel-mini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ship-fuel-mini-track {
+  width: 40px;
+  height: 4px;
+  background: var(--color-bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ship-fuel-mini-fill {
+  height: 100%;
+  background: var(--color-cyan);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.ship-fuel-mini-label {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+
+/* ── Transit progress bar ── */
+.ship-transit {
+  padding: 4px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ship-transit-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+.ship-transit-dest {
+  color: var(--color-warning);
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.ship-transit-eta {
+  color: var(--color-warning);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}
+
+.ship-transit-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 170, 0, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ship-transit-fill {
+  height: 100%;
+  background: var(--color-warning);
+  border-radius: 2px;
+  transition: width 1s linear;
+  box-shadow: 0 0 6px rgba(255, 170, 0, 0.4);
+}
+
+/* ── Cooldown bar ── */
+.ship-cooldown {
+  padding: 4px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ship-cooldown-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.ship-cooldown-label {
+  color: var(--color-cyan);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}
+
+.ship-cooldown-eta {
+  color: var(--color-cyan);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}
+
+.ship-cooldown-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 232, 208, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ship-cooldown-fill {
+  height: 100%;
+  background: var(--color-cyan);
+  border-radius: 2px;
+  transition: width 1s linear;
+  box-shadow: 0 0 6px rgba(0, 232, 208, 0.4);
+}
+
+/* ── Expanded detail ── */
+.ship-detail {
+  padding: 6px 10px 12px;
+  border-top: 1px solid var(--color-border-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ship-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ship-section-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  opacity: 0.7;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--color-border-dim);
+}
+
+.ship-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+}
+
+.ship-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ship-stat-label {
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+}
+
+.ship-stat-value {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+}
+
+/* ── Bar stats ── */
+.ship-bar-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ship-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ship-bar-track {
+  height: 5px;
+  background: var(--color-bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ship-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* ── Cargo list ── */
+.ship-cargo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.ship-cargo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 8px;
+  background: var(--color-bg-secondary);
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.ship-cargo-name {
+  color: var(--color-text);
+}
+
+.ship-cargo-units {
+  color: var(--color-text-dim);
+}
+
+/* ── Module / Mount tags ── */
+.ship-module-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ship-module-tag,
+.ship-mount-tag {
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text);
+}
+
+.ship-mount-tag {
+  border-color: rgba(255, 100, 100, 0.2);
+  color: #ffa8a8;
+}

@@ -1,0 +1,592 @@
+.agent-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 232, 208, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 232, 208, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.agent-card {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 48px 40px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+}
+
+.agent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.agent-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.agent-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: var(--glow-cyan);
+}
+
+.agent-logout {
+  background: none;
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text-dim);
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.agent-logout:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+/* Existing agent info */
+.agent-info {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+}
+
+.agent-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.agent-info-row + .agent-info-row {
+  border-top: 1px solid var(--color-border-dim);
+}
+
+.agent-info-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.agent-info-value {
+  font-size: 0.85rem;
+  color: var(--color-text-bright);
+}
+
+.agent-info-value.credits {
+  color: var(--color-cyan);
+  font-weight: 600;
+}
+
+.agent-continue-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(0, 232, 208, 0.08);
+  border: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 16px;
+}
+
+.agent-continue-btn:hover {
+  background: rgba(0, 232, 208, 0.15);
+  box-shadow: var(--glow-cyan-strong);
+}
+
+/* Divider */
+.agent-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0;
+  color: var(--color-text-dim);
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.agent-divider::before,
+.agent-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-dim);
+}
+
+/* ── Saved agents list in AgentScreen ── */
+.agent-saved-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agent-saved-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.agent-saved-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-align: left;
+}
+
+.agent-saved-btn:hover:not(:disabled) {
+  border-color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.05);
+}
+
+.agent-saved-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.agent-saved-symbol {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--color-text-bright);
+  letter-spacing: 0.06em;
+}
+
+.agent-saved-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+.agent-saved-delete {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--color-border-dim);
+  border-radius: 4px;
+  color: var(--color-text-dim);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.agent-saved-delete:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.agent-saved-confirm {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.agent-saved-confirm-yes,
+.agent-saved-confirm-no {
+  padding: 4px 8px;
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border-dim);
+  border-radius: 3px;
+  cursor: pointer;
+  background: none;
+}
+
+.agent-saved-confirm-yes {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.agent-saved-confirm-no {
+  color: var(--color-text-dim);
+}
+
+/* Register new agent */
+.register-section {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.register-field {
+  margin-bottom: 20px;
+}
+
+.register-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-bottom: 8px;
+}
+
+.register-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text-bright);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+.register-input:focus {
+  border-color: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.register-input::placeholder {
+  color: var(--color-text-dim);
+  text-transform: none;
+}
+
+/* Faction list */
+.faction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 16px;
+}
+
+.faction-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+}
+
+.faction-card:hover {
+  border-color: var(--color-cyan-dim);
+  background: rgba(0, 232, 208, 0.02);
+}
+
+.faction-card.selected {
+  border-color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.05);
+  box-shadow: var(--glow-cyan);
+}
+
+.faction-card-logo {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faction-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: grayscale(30%) brightness(0.9);
+  transition: filter 0.2s;
+}
+
+.faction-card.selected .faction-logo-img {
+  filter: grayscale(0%) brightness(1.1) drop-shadow(0 0 4px var(--color-cyan-glow));
+}
+
+.faction-logo-placeholder {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-dim);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-dim);
+}
+
+.faction-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.faction-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.faction-card-name {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--color-text);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.faction-card.selected .faction-card-name {
+  color: var(--color-cyan);
+}
+
+.faction-card-status {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border: 1px solid;
+}
+
+.faction-card-status.open {
+  color: var(--color-success);
+  border-color: rgba(0, 255, 136, 0.3);
+  background: rgba(0, 255, 136, 0.06);
+}
+
+.faction-card-status.closed {
+  color: var(--color-text-dim);
+  border-color: var(--color-border-dim);
+  background: transparent;
+}
+
+.faction-card-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.faction-trait-tag {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  padding: 1px 6px;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-dim);
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+
+.faction-card.selected .faction-trait-tag {
+  border-color: rgba(0, 232, 208, 0.2);
+  color: var(--color-text);
+}
+
+.faction-trait-tag.more {
+  color: var(--color-text-dim);
+  font-style: italic;
+}
+
+/* Selected faction detail panel */
+.faction-detail {
+  padding: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.faction-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.faction-detail-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px var(--color-cyan-glow));
+}
+
+.faction-detail-name {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-cyan);
+  text-transform: uppercase;
+}
+
+.faction-detail-hq {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+  margin-top: 2px;
+}
+
+.faction-detail-desc {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.faction-detail-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.faction-detail-traits .faction-trait-tag {
+  border-color: rgba(0, 232, 208, 0.15);
+  color: var(--color-text);
+}
+
+.register-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-button:hover:not(:disabled) {
+  background: rgba(0, 232, 208, 0.1);
+  box-shadow: var(--glow-cyan-strong);
+}
+
+.register-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.agent-error {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(255, 59, 92, 0.08);
+  border: 1px solid rgba(255, 59, 92, 0.3);
+  color: var(--color-error);
+  font-size: 0.8rem;
+}
+
+.agent-account-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0, 232, 208, 0.05);
+  border: 1px solid var(--color-cyan-dim);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.agent-account-badge {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: var(--color-cyan);
+  background: rgba(0, 232, 208, 0.1);
+  border: 1px solid var(--color-cyan-dim);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.agent-success {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: var(--color-success);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.loading-text {
+  text-align: center;
+  padding: 24px;
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
